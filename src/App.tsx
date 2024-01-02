@@ -1,51 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
 import {lazy,Suspense} from 'react';
 import {Routes, Route,Link} from 'react-router-dom';
-
-// import Home from './Pages/Home';
-import About from './Pages/Cart'
-import Header from './Pages/Header';
-// import Signup from './authentication/Signup';
-// import Login from './authentication/Login';
+import Header from './component/Header'
 import Cart from './Pages/Cart';
-// import WishList from './WishList.js/WishList'
-
+import styled from 'styled-components';
 const Home = lazy(()=>import('./Pages/Home'));
-// const Singnup = lazy(()=>import('./authentication/Signup'));
-// const Login =  lazy(()=>import('./authentication/Login'));
+
+
+const ProductItemConatiner = styled.div`
+  padding-top:100px;
+;`
 
 function App() {
   return (
     <div className="App">
       <Header/>
-       <Routes>
+      <ProductItemConatiner>
+        <Routes>
           <Route path="/"  element={
           <Suspense fallback={<FallbackUI/>}>
             < Home/>
           </Suspense>
         } />
         <Route path="/cart" element={< Cart/>} />
-          {/* <Route path="/signup" element={
-          <Suspense fallback={<FallbackUI/>}>
-            < Singnup/>
-          </Suspense>
-        } />
-          <Route path="/login" element= {
-          <Suspense fallback={<FallbackUI/>}>
-            < Login/>
-          </Suspense>
-        } />
-          <Route path="/cart" element={< Cart/>} />
-          <Route path="/wishlist" element={< WishList/>} /> */}
-       </Routes>
+        </Routes>
+      </ProductItemConatiner>
     </div>
   );
 }
 
 export default App;
-
-
 
 
 const FallbackUI =() =>{

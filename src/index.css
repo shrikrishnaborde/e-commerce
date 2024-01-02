@@ -1,6 +1,12 @@
+:root {
+  --fontFamily : "Poppins", sans-serif;
+  --white : white;
+  --black: black;
+}
+
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--fontFamily);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
