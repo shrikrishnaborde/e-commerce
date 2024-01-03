@@ -25,7 +25,9 @@ const Loadingspinner = styled.div`
 
 function Loader() {
   return (
+    // Position styles for Loading wheel
     <Spinnercontainer>
+      {/* Spinner styles */}
       <Loadingspinner/>
     </Spinnercontainer>
   )

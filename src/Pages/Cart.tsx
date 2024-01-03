@@ -4,33 +4,38 @@ import { ProductItemWrapper } from '../styles/globalStyle';
 import styled from 'styled-components';
 import CartCtaContainer from '../component/CartItemCta';
 
-const ProductItemBox = styled.div`
+//styles for container of cart products
+const CartProductItemContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `
-
+//styles for Information inside product card
 const CartProductItem = styled(ProductItemWrapper)`
   padding:0px;
   margin:20px;
 `
 
+//Page to display Products inside cart
 function Cart() {
+  //fetched products inside cart from redux store
   const cartItems = useSelector((state: any) => state.cartSlice.cart);
 
   return cartItems?.length > 0 ?  (
-    <ProductItemBox>
+    <CartProductItemContainer>
       {cartItems.map((data:any, index : number)=>{
         return (
-          <CartProductItem>
+          <CartProductItem> 
+            {/* display prodct Inrmation(name, price) */}
             <ProductItemInfo productdata = {data} />
+            {/* Actions on quntity of product  */}
             <CartCtaContainer productdata = {data} qty = {data.quantity} itemId = {data.id} />
           </CartProductItem>
         )
       })}
-    </ProductItemBox>
-  ) :  <div>Please add Items to the cart</div>
+    </CartProductItemContainer>
+  ) :  <div>Please add Items to the cart</div>//Show this message if cart is empty
 
 }
 

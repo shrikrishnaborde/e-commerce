@@ -1,9 +1,8 @@
-import React ,{useState} from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux'
-import {removeItem ,cartData, clearItem} from '../slices/cartSlice'
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { removeItemFromCart, addItemToCart, clearItemFromCart } from "../redux/slices/cartSlice";
 
+//styles for cart actions
 const CartCtaContainer = styled.div`
   margin:1rem;
   display: flex;
@@ -29,45 +28,52 @@ const CartCtaContainer = styled.div`
 }
 `;
 
+//styles for increase,decrease buttons and quantity
 const ActionWrapper = styled.div`
-  display : flex;
-  width:40%;
+  display: flex;
+  width: 40%;
 
   span {
     width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
-}`;
-
-function CartItemCta({itemId, productdata ,qty}:any) {
-  const dispatch = useDispatch()
-
-const removeHandler = (itemId:number) =>{
-  dispatch(clearItem({itemId}))
-}
-
-const addToCart =(productdata : any) =>{
-  dispatch(cartData({...productdata, quantity :1}))
-}
-
-  const removeToCart =(productdata : any) =>{
-    dispatch(removeItem({...productdata, quantity :1}))
   }
+`;
+
+// Component to display quantity and increase/descrease quantity and remove product
+function CartItemCta({ itemId, productdata, qty }: any) {
+  const dispatch = useDispatch();
+
+  //function to remove item from cart
+  const removeHandler = (itemId: number) => {
+    dispatch(clearItemFromCart({ itemId }));
+  };
+
+  //function to increase quantity of product in cart
+  const increaseQuantity = (productdata: any) => {
+    dispatch(addItemToCart({ ...productdata, quantity: 1 }));
+  };
+
+  //function to decrease quantity of product in cart
+  const decreaseQuantity = (productdata: any) => {
+    dispatch(removeItemFromCart({ ...productdata, quantity: 1 }));
+  };
 
   return (
-    <CartCtaContainer >
-      <button onClick = {()=>removeHandler(itemId)}>Remove</button>
+    <CartCtaContainer>
+      {/* button to remove product from cart */}
+      <button onClick={() => removeHandler(itemId)}>Remove</button>
       <ActionWrapper>
-        <button onClick ={() =>removeToCart(productdata)}>-</button>
+        {/* button to decrease quantity of item in cart */}
+        <button onClick={() => decreaseQuantity(productdata)}>-</button>
+        {/* quantity of product */}
         <span>{qty}</span>
-        <button onClick ={() =>addToCart(productdata)}>+</button>
+        {/* button to increase quantity of product in cart */}
+        <button onClick={() => increaseQuantity(productdata)}>+</button>
       </ActionWrapper>
     </CartCtaContainer>
-  )
+  );
 }
 
-export default CartItemCta
-
-
-
+export default CartItemCta;

@@ -1,7 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import ProductItem from './ProductContainer'
+import styled from "styled-components";
 
+//styles for Image inside product card
 const ProdutImage = styled.div`
   width: 300px;
   height: 200px;
@@ -10,14 +9,17 @@ const ProdutImage = styled.div`
   align-items: center;
 
   img {
-    width:100%;
-    height:90%;
+    width: 100%;
+    height: 90%;
   }
-`
+`;
 
+//wrapper component for Image and Information component
 const ProdutImageWrapper = styled.div`
-  display : flex;
-`
+  display: flex;
+`;
+
+//styles for product information inside product card
 const ProdutDescription = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,24 +30,28 @@ const ProdutDescription = styled.div`
   p {
     margin: 0px 10px 5px;
   }
-`
+`;
 
-function ProductItemInfo({productdata}:any) {
-
-const {image,price,title} = productdata;
+//This compoennt is used to show image and Information(Name,Price) in Product card
+function ProductItemInfo({ productdata }: any) {
+  const { image, price, title } = productdata;
 
   return (
+    //Wrapper styled component for Image and Information(Name,Price)
     <ProdutImageWrapper>
+      {/* Wrapper component for image inside product card */}
       <ProdutImage>
-        <img style = {{width: '50%'}} src = {image} alt ="img" />
+        <img style={{ width: "50%" }} src={image} alt="img" />
       </ProdutImage>
 
+      {/* Information component(Name,Price) inside product card */}
       <ProdutDescription>
         <p>{title}</p>
         <p>Rs. {price}</p>
       </ProdutDescription>
+
     </ProdutImageWrapper>
-  )
+  );
 }
 
-export default ProductItemInfo
+export default ProductItemInfo;
